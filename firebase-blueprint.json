@@ -1,0 +1,60 @@
+{
+  "entities": {
+    "lead": {
+      "title": "Lead",
+      "description": "A submitted form from a potential client.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name of the contact"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number"
+        },
+        "address": {
+          "type": "string",
+          "description": "Property address"
+        },
+        "claimFiled": {
+          "type": "string",
+          "enum": ["yes", "no"]
+        },
+        "approved": {
+          "type": "string",
+          "enum": ["yes", "no", "idk", "n/a"]
+        },
+        "createdAt": {
+          "type": "timestamp"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["new", "contacted", "closed"]
+        }
+      },
+      "required": ["name", "phone", "address", "claimFiled", "approved", "createdAt", "status"]
+    },
+    "admin": {
+      "title": "Admin",
+      "description": "Admin users capable of viewing leads.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      },
+      "required": ["email"]
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "schema": "lead",
+      "description": "Stores user submitted forms."
+    },
+    "/admins/{userId}": {
+      "schema": "admin",
+      "description": "Stores admin privileges."
+    }
+  }
+}
